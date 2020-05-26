@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "com.proto.calculator";
+option java_multiple_files = true;
+
+
+message PrimeNumberDecompositionRequest {
+    int64 number = 1;
+}
+message PrimeNumberDecompositionResponse {
+    int64 prime_factor = 1;
+}
+
+message PairOfNumbers {
+    int64 a = 1;
+    int64 b = 2;
+}
+
+message SumRequest {
+    PairOfNumbers pairOfNumbers = 1;
+}
+
+message SumResponse {
+    int64 result = 1;
+}
+
+message ComputeAverageRequest {
+    int64 number = 1;
+}
+
+message ComputeAverageResponse{
+    double result = 1;
+}
+
+service CalculatorService {
+    rpc Sum (SumRequest) returns (SumResponse) {
+    }
+    rpc PrimeNumberDecomposition (PrimeNumberDecompositionRequest) returns (stream PrimeNumberDecompositionResponse) {
+    }
+    rpc ComputeAverage (stream ComputeAverageRequest) returns (ComputeAverageResponse) {
+    }
+}
